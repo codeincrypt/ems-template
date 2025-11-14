@@ -132,8 +132,10 @@ const Recruitment = () => {
   };
 
   const scheduleInterview = (candidate: Candidate) => {
+    const dates = new Date()
+
     const interview: Interview = {
-      id: Date.now().toString(),
+      id: dates.toString(),
       candidateId: candidate.id,
       candidateName: candidate.name,
       position: candidate.position,

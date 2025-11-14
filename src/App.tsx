@@ -1,11 +1,12 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ConfigProvider } from "antd";
 import { Toaster } from "@components/ui/toaster";
 import { Toaster as Sonner } from "@components/ui/sonner";
 import { TooltipProvider } from "@components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ConfigProvider } from "antd";
+
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import MainLayout from "./components/layouts/MainLayout"
+import MainLayout from "./components/layouts/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import EmployeeProfile from "./pages/EmployeeProfile";
@@ -17,8 +18,11 @@ import Recruitment from "./pages/Recruitment";
 import Performance from "./pages/Performance";
 import Analytics from "./pages/Analytics";
 import Login from "./pages/Login";
-import ComingSoon from "./pages/ComingSoon";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import Documents from "./pages/Documents";
+import Sprints from "./pages/Sprints";
 
 const queryClient = new QueryClient();
 
@@ -54,14 +58,16 @@ const App = () => (
                         <Route path="/employees" element={<Employees />} />
                         <Route path="/employees/:id" element={<EmployeeProfile />} />
                         <Route path="/tasks" element={<Tasks />} />
+                        <Route path="/sprints" element={<Sprints />} />
                         <Route path="/attendance" element={<Attendance />} />
                         <Route path="/leave" element={<Leave />} />
                         <Route path="/payroll" element={<Payroll />} />
                         <Route path="/recruitment" element={<Recruitment />} />
                         <Route path="/performance" element={<Performance />} />
                         <Route path="/analytics" element={<Analytics />} />
-                        <Route path="/documents" element={<ComingSoon title="Documents" description="Store and manage company documents" />} />
-                        <Route path="/settings" element={<ComingSoon title="Settings" description="Configure system settings" />} />
+                        <Route path="/documents" element={<Documents />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/settings" element={<Settings />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     </MainLayout>

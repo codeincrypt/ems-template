@@ -1,9 +1,13 @@
-import { Card, Tag, Avatar, Button } from 'antd';
-import { PlusOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { Card, Tag, Avatar, Button, Modal } from 'antd';
+import { PlusOutlined, ClockCircleOutlined, CommentOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 import tasksData from '../data/tasks.json';
 import employeesData from '../data/employees.json';
+import { TaskComments } from '@components/TaskComments';
 
 const Tasks = () => {
+  const [selectedTask, setSelectedTask] = useState<string | null>(null);
+  const [isCommentsModalOpen, setIsCommentsModalOpen] = useState(false);
   const columns = ['To Do', 'In Progress', 'In Review', 'Done'];
   
   const getTasksByStatus = (status: string) => {
@@ -79,10 +83,21 @@ const Tasks = () => {
                       </div>
                       
                       <div className="flex items-center justify-between pt-2 border-t border-border">
-                        <Avatar 
-                          src={getEmployeeAvatar(task.assigneeId)} 
-                          size={24}
-                        />
+                        <div className="flex items-center gap-2">
+                          <Avatar 
+                            src={getEmployeeAvatar(task.assigneeId)} 
+                            size={24}
+                          />
+                          <Button
+                            type="text"
+                            size="small"
+                            icon={<CommentOutlined />}
+                            onClick={() => {
+                              setSelectedTask(task.id);
+                              setIsCommentsModalOpen(true);
+                            }}
+                          />
+                        </div>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
                           <ClockCircleOutlined />
                           <span>{new Date(task.dueDate).toLocaleDateString()}</span>
@@ -96,6 +111,16 @@ const Tasks = () => {
           );
         })}
       </div>
+
+      <Modal
+        title="Task Discussion"
+        open={isCommentsModalOpen}
+        onCancel={() => setIsCommentsModalOpen(false)}
+        footer={null}
+        width={700}
+      >
+        {selectedTask && <TaskComments taskId={selectedTask} />}
+      </Modal>
     </div>
   );
 };

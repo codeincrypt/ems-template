@@ -47,6 +47,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       label: <Link to="/tasks">Tasks</Link>,
     },
     {
+      key: '/sprints',
+      icon: <ProjectOutlined />,
+      label: <Link to="/sprints">Sprints</Link>,
+    },
+    {
       key: '/attendance',
       icon: <ClockCircleOutlined />,
       label: <Link to="/attendance">Attendance</Link>,
@@ -97,7 +102,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: 'Profile',
+      label: <Link to="/profile">Profile</Link>,
     },
     {
       key: 'logout',
